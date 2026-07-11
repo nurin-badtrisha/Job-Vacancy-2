@@ -31,7 +31,7 @@ if (isset($_GET['search']) || isset($_GET['location']) || isset($_GET['salary'])
                 salary_range LIKE '% to %' 
                 AND $user_salary BETWEEN 
                     CAST(SUBSTRING_INDEX(salary_range, ' to ', 1) AS UNSIGNED) 
-                    AND Math.floor(CAST(SUBSTRING_INDEX(salary_range, ' to ', -1) AS UNSIGNED))
+                    AND CAST(SUBSTRING_INDEX(salary_range, ' to ', -1) AS UNSIGNED)
             )
             OR 
             (
@@ -176,7 +176,6 @@ $result = mysqli_query($dbconn, $query);
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            transition: margin-left 0.3s ease;
         }
 
         .white-panel {
@@ -198,6 +197,7 @@ $result = mysqli_query($dbconn, $query);
         .headline {
             font-size: 36px;
             color: #2D2D2D;
+            margin-top: 20px;
             margin-bottom: 40px;
             font-weight: 500;
         }
@@ -394,6 +394,8 @@ $result = mysqli_query($dbconn, $query);
     <div class="main-content" id="mainContent">
         <div class="white-panel">
             <div class="main">
+                <img src="startIT2.png.png" width="30%">
+
                 <div class="headline">
                     Find your <span>Dream Job</span> here!
                 </div>
