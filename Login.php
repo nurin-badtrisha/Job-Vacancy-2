@@ -7,7 +7,7 @@
     <title>Log in</title>
     <style>
         body {
-            background-color: #b5a6f2; 
+            background-color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
@@ -17,7 +17,7 @@
         }
 
         .nav-header {
-            background-color: #4b1a6a; 
+            background-color: #4A0E4E; 
             width: 100%;
             height: 70px;
             display: flex;
@@ -29,10 +29,11 @@
         }
 		
         .nav-logo-img {
-            width: 45px;
+           width: 45px;
             height: 45px;
             display: block;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .nav-right-link {
@@ -63,8 +64,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 5px;
-            width: 100%;
+            margin-bottom: 10px;
+            width: 75%;
         }
 
         .brand-logo-container2 img {
@@ -74,7 +75,7 @@
         }
 
         .login-box {
-            background-color: #51257d;
+            background-color: #4A0E4E;
             padding: 40px 50px;
             border-radius: 24px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
@@ -149,17 +150,16 @@
             box-sizing: border-box;
         }
 
-       .btn-container {
-		width: 100%;
-		display: flex;
-		justify-content: flex-end;
-		margin-top: 5px;
-		gap: 15px; 
-	}
+        .btn-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 5px;
+            gap: 15px; 
+        }
 
-        
         .btn-submit {
-            background-color: #4A154B;
+            background-color: #4A0E4E;
             color: #FFFFFF;
             border: none;
             padding: 12px 40px;
@@ -186,7 +186,7 @@
         <form action="authenticate.php" method="POST" class="login-wrapper">
             
             <div class="brand-logo-container2">
-                <img src="startIT.png" alt="startIT Logo">
+                <img src="startIT2.png.png" alt="startIT Logo">
             </div>
             
             <div class="login-box">
@@ -219,10 +219,10 @@
                 </div>
             </div>
 
-           <div class="btn-container">
-				<button type="submit" class="btn-submit">Submit</button>
-				<button type="button" class="btn-submit" onclick="window.location.href='interface.php'">Back</button>
-			</div>
+            <div class="btn-container">
+                <button type="submit" class="btn-submit">Submit</button>
+                <button type="button" class="btn-submit" onclick="window.location.href='interface.php'">Back</button>
+            </div>
             
         </form>
     </div>
