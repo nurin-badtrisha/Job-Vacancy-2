@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,19 +13,25 @@ session_start();
     }
 
     body {
-        background-color: #b9acf3;
+        background-color: #ffffff;
     }
+	
+	.register-title {
+    font-size: 24px;
+    font-weight: bold;
+    flex-grow: 1;
+    text-align: center;
+	}
 
-    
     .top-bar {
-        background-color: #5a2d82;
-        height: 70px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 40px;
-        color: white;
-    }
+    background-color: #4A0E4E;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    color: white;
+	}
 
     .logo {
         display: flex;
@@ -36,9 +39,12 @@ session_start();
     }
 
     .logo img {
-        max-height: 45px;
-        width: auto;
-    }
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: none;
+	}
 
     .about {
         font-size: 16px;
@@ -58,27 +64,12 @@ session_start();
         font-weight: bold;
     }
 
-    /* Error Banner Style */
-    .error-alert {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 3px solid #721c24;
-        padding: 15px;
-        width: 85%;
-        max-width: 1100px;
-        margin: 0 auto 20px auto;
-        border-radius: 15px;
-        font-weight: bold;
-        font-size: 16px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    }
-
    
     .form-container {
-        background-color: #512b7c;
+        background-color: #4A0E4E;
         width: 85%;
         max-width: 1100px;
-        margin: 0 auto 50px auto;
+        margin: 40px auto 50px auto;
         padding: 40px;
         border-radius: 30px;
         box-shadow: 0 10px 35px rgba(0,0,0,0.3);
@@ -227,7 +218,7 @@ session_start();
     }
 
     .submit-btn {
-        background-color: #3b145a;
+        background-color: #4A0E4E;
         color: white;
         border: 2px solid #6a3fa0;
         padding: 12px 50px;
@@ -271,7 +262,7 @@ session_start();
             grid-template-columns: 1fr;
         }
         .page-title, .form-container {
-            width: 90%;
+            width: 50%;
             padding: 25px;
         }
     }
@@ -281,18 +272,10 @@ session_start();
 <body>
 
 <div class="top-bar">
-    <div class="logo">
-        <img src="startIt.png" alt="StartIT Logo">
-    </div>
+    <div class="logo"><img src="startIt logo.jpg" alt="Logo"></div>
+    <div class="register-title">Register</div>
+    <div class="logo-spacer"></div>
 </div>
-
-<div class="page-title">Register</div>
-
-<?php if (isset($_SESSION['error'])): ?>
-    <div class="error-alert">
-        ⚠️ <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-    </div>
-<?php endif; ?>
 
 <form class="form-container" action="registerUserProcess.php" method="POST" enctype="multipart/form-data">
 
@@ -315,7 +298,7 @@ session_start();
 
             <div class="form-group">
                 <label>IC Number:</label>
-                <input type="text" name="icnumber" placeholder="e.g. 04XXXX-XX-XXXX" required>
+                <input type="text" name="icnumber" placeholder="e.g. 010203101234" required>
             </div>
 
             <div class="form-group">
@@ -337,7 +320,7 @@ session_start();
 
             <div class="form-group">
                 <label>Skills:</label>
-                <input type="text" name="skills" placeholder="e.g. PHP, HTML, CSS, Java" required>
+                <input type="text" name="skills" placeholder="e.g. PHP, HTML, CSS, Java">
             </div>
 
             <div class="form-group">
@@ -347,7 +330,7 @@ session_start();
 
             <div class="form-group">
                 <label>Years of Experience:</label>
-                <input type="number" name="experience" min="0" placeholder="e.g. 2" required>
+                <input type="number" name="experience" min="0" placeholder="e.g. 2">
             </div>
 
             <div class="form-group">
@@ -409,7 +392,7 @@ session_start();
 
                 <div>
                     <label>Postcode:</label>
-                    <input type="text" name="postcode" placeholder="e.g. 43200" inputmode="numeric" pattern="[0-9]{5}" minlength="5" maxlength="5" required>
+                    <input type="text" name="postcode" placeholder="e.g. 43200" required>
                 </div>
             </div>
             
@@ -423,9 +406,9 @@ session_start();
 </form>
 
 <script>
+
 const fileInput = document.getElementById('profileImageInput');
 const avatarPreview = document.getElementById('avatarPreview');
-const registrationForm = document.querySelector('.form-container');
 
 fileInput.addEventListener('change', function() {
     const chosenFile = this.files[0];
@@ -435,17 +418,6 @@ fileInput.addEventListener('change', function() {
             avatarPreview.setAttribute('src', e.target.result);
         }
         reader.readAsDataURL(chosenFile);
-    }
-});
-
-registrationForm.addEventListener('submit', function(e) {
-    if (fileInput.files.length === 0) {
-        e.preventDefault();
-        alert('Please attach a profile picture before submitting your registration!');
-        
-        const avatarWrapper = document.querySelector('.avatar-wrapper');
-        avatarWrapper.style.borderColor = '#721c24';
-        avatarWrapper.style.backgroundColor = '#f8d7da';
     }
 });
 </script>
