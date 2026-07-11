@@ -59,7 +59,7 @@ $result = $dbconn->query($sql);
         }
 
         body {
-            background-color: #b4a7d6; 
+            background-color: #ffffff; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             display: flex;
@@ -68,7 +68,7 @@ $result = $dbconn->query($sql);
         }
 
         .nav-header {
-            background-color: #4f0f69; 
+            background-color: #4A0E4E; 
             width: 100%;
             height: 70px;
             display: flex;
@@ -99,7 +99,8 @@ $result = $dbconn->query($sql);
             width: 45px;
             height: 45px;
             display: block;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .header-title {
@@ -231,7 +232,7 @@ $result = $dbconn->query($sql);
 
       
         .btn-action-edit {
-            color: #4f0f69;
+            color: #4A0E4E;
             text-decoration: none;
             font-weight: bold;
             cursor: pointer;
@@ -269,7 +270,7 @@ $result = $dbconn->query($sql);
             display: inline-flex;
             align-items: center;
             gap: 8px; 
-            background-color: #3b145a;
+            background-color: #4A0E4E;
             color: white !important;
             padding: 10px 20px; 
             font-size: 14px;
@@ -282,7 +283,7 @@ $result = $dbconn->query($sql);
         }
 
         .btn-primary:hover {
-            background-color: #3b145a;
+            background-color: #4A0E4E;
             transform: translateY(-1px); 
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
         }
@@ -294,7 +295,7 @@ $result = $dbconn->query($sql);
         
         
         header {
-            background-color: #4f0f69; 
+            background-color: #4A0E4E; 
             color: white;
             width: 100%;
             padding: 15px 40px;
