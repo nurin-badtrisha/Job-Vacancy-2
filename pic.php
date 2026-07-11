@@ -11,14 +11,12 @@ if ($conn->connect_error) {
     die("Connection to database failed: " . $conn->connect_error);
 }
 
-
 if (!isset($_SESSION['username'])) {
     header("Location: Login.php");
     exit();
 }
 
 $session_username = $_SESSION['username'];
-
 
 $safe_username = $conn->real_escape_string($session_username);
 $pic_query = "SELECT pic_id FROM person_in_charge WHERE username = '$safe_username'";
@@ -31,10 +29,8 @@ if ($pic_result && $pic_result->num_rows > 0) {
     die("Error: Person In Charge identity could not be verified in the registry.");
 }
 
-
 if (isset($_POST['delete_job_id'])) {
     $delete_id = intval($_POST['delete_job_id']);
-    
     
     $delete_sql = "DELETE FROM job_posting WHERE job_id = ? AND pic_id = ?";
     $stmt = $conn->prepare($delete_sql);
@@ -67,7 +63,7 @@ if (isset($_POST['delete_job_id'])) {
 
         body, html {
             height: 100%;
-            background-color: #f7f5f0;
+            background-color: #F8F9FA;
         }
 
         .dashboard-container {
@@ -76,15 +72,15 @@ if (isset($_POST['delete_job_id'])) {
             width: 100%;
         }
 
-        
         .left-col {
             width: 50%;
-            background-color: #FAF6F0; 
+            background-color: #FFFFFF; 
             padding: 40px 60px;
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            border-right: 1px solid #EAEAEA;
         }
 
         .header-logo { 
@@ -99,10 +95,9 @@ if (isset($_POST['delete_job_id'])) {
         }
 
         .logo-text {
-            font-family: serif;
             font-size: 20px;
             font-weight: bold;
-            color: #111;
+            color: #4A0E4E;
         }
 
         .left-content {
@@ -113,13 +108,17 @@ if (isset($_POST['delete_job_id'])) {
 
         .left-content h1 {
             font-size: 3.2rem;
-            color: #584137; 
+            color: #4A0E4E; 
             line-height: 1.15;
             margin-bottom: 25px;
         }
 
+        .left-content h1 span {
+            color: #6B21A8;
+        }
+
         .left-content .subtitle {
-            color: #72625A;
+            color: #4A5568;
             font-size: 1.05rem;
             line-height: 1.6;
         }
@@ -130,20 +129,20 @@ if (isset($_POST['delete_job_id'])) {
             left: 0;
             width: 80%;
             height: 40%;
-            background: linear-gradient(135deg, #e3d5ca 0%, #d5bdaf 100%);
+            background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%);
             border-top-right-radius: 12px;
-            opacity: 0.6;
+            opacity: 0.4;
             z-index: 1;
         }
 
-        
         .right-col {
             width: 50%;
-            background-color: #B4A4EB; 
+            background-color: #4A0E4E; 
             padding: 40px 60px;
             display: flex; 
             flex-direction: column;
             align-items: flex-end;
+            box-shadow: inset 10px 0 30px rgba(0, 0, 0, 0.05);
         }
 
         .top-nav {
@@ -155,30 +154,35 @@ if (isset($_POST['delete_job_id'])) {
 
         .btn {
             display: inline-block;
-            padding: 12px 28px;
-            font-weight: 700;
+            padding: 8px 24px;
+            font-weight: 600;
             font-size: 0.9rem;
             text-decoration: none;
-            border-radius: 6px;
-            letter-spacing: 0.5px;
+            border-radius: 20px;
             cursor: pointer;
-            border: none;
-            transition: transform 0.2s, opacity 0.2s;
+            border: 1px solid #FFFFFF;
+            transition: background-color 0.2s, transform 0.1s;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
         }
 
         .btn-primary {
-            background-color: #4A154B; 
-            color: white;
+            background-color: #FFFFFF;
+            color: #4A0E4E;
+            border-color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background-color: #F8F9FA;
+            color: #4A0E4E;
         }
 
         .btn-secondary {
-            background-color: #4A154B;
-            color: white;
+            background: none;
+            color: #FFFFFF;
         }
 
         .feed-section {
@@ -190,27 +194,30 @@ if (isset($_POST['delete_job_id'])) {
         }
 
         .section-title {
-            color: #4A154B;
+            color: #FFFFFF;
             font-size: 1.6rem;
             margin-bottom: 10px;
             align-self: flex-start;
+            font-weight: 600;
         }
 
         .job-card {
-            background-color: #FFFDF9;
-            border-radius: 12px;
+            background-color: #FFFFFF;
+            border-radius: 16px;
             padding: 20px 25px; 
             display: flex;
             justify-content: space-between;
             align-items: stretch;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             position: relative;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
             width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .job-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         .card-details {
@@ -222,27 +229,30 @@ if (isset($_POST['delete_job_id'])) {
 
         .badge {
             align-self: flex-start;
-            padding: 4px 10px;
+            padding: 4px 12px;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .badge-orange {
-            background-color: #FFEEDB;
-            color: #D48C46;
+            background-color: #F3E8FF;
+            color: #6B21A8;
         }
 
         .card-details h3 {
-            font-size: 1.3rem;
-            color: #222;
-            font-weight: bold;
+            font-size: 1.25rem;
+            color: #4A0E4E;
+            font-weight: 700;
             margin-top: 2px;
         }
 
         .location {
-            color: #666;
+            color: #4A5568;
             font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .card-meta {
@@ -254,14 +264,15 @@ if (isset($_POST['delete_job_id'])) {
         }
 
         .time-stamp {
-            color: #b0b0b0;
+            color: #A0AEC0;
             font-size: 0.85rem;
+            font-weight: 500;
         }
 
         .btn-card-delete {
             background: none;
             border: none;
-            color: #c62828;
+            color: #DC2626;
             font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
@@ -272,7 +283,7 @@ if (isset($_POST['delete_job_id'])) {
         }
 
         .btn-card-delete:hover {
-            color: #b71c1c;
+            color: #991B1B;
             text-decoration: underline;
         }
     </style>
@@ -288,7 +299,7 @@ if (isset($_POST['delete_job_id'])) {
             </div>
 
             <div class="left-content">
-                <h1>Post Your Job<br>Vacancy Here!</h1>
+                <h1>Post Your Job<br>Vacancy <span>Here!</span></h1>
                 <p class="subtitle">
                     Start IT is the platform to all company posted and review the applicant in IT field easily.
                 </p>
@@ -309,7 +320,6 @@ if (isset($_POST['delete_job_id'])) {
                 <h2 class="section-title">History Post</h2>
 
                 <?php
-                
                 $query = "SELECT * FROM job_posting WHERE pic_id = '$current_pic_id' ORDER BY job_id DESC"; 
                 $result = $conn->query($query); 
 
