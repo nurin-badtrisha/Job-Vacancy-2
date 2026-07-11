@@ -13,12 +13,12 @@
     }
 
     body {
-        background-color: #b4a7d6;;
+        background-color: #ffffff;;
     }
 
    
     .top-bar {
-        background-color: #5a2d82;
+        background-color: #4A0E4E;
         height: 70px;
         display: flex;
         align-items: center;
@@ -44,22 +44,12 @@
         padding: 6px 15px;
         border-radius: 20px;
     }
-
-    
-    .page-title {
-        max-width: 85%;
-        margin: 40px auto 15px auto;
-        font-size: 36px;
-        color: white;
-        font-weight: bold;
-    }
-
-   
+  
     .form-container {
-        background-color: #512b7c;
+        background-color: #4A0E4E;
         width: 85%;
         max-width: 1000px;
-        margin: 0 auto 50px auto;
+        margin: 50px auto 50px auto; 
         padding: 40px;
         border-radius: 30px;
         box-shadow: 0 10px 35px rgba(0,0,0,0.3);
@@ -116,7 +106,7 @@
     }
 
     .submit-btn {
-        background-color: #3b145a;
+        background-color: #4A0E4E;
         color: white;
         border: 2px solid #6a3fa0;
         padding: 12px 50px;
@@ -149,7 +139,7 @@
 	
 	 
         header {
-            background-color: #4f0f69; 
+            background-color: #4A0E4E; 
             color: white;
             width: 100%;
             padding: 15px 40px;
@@ -190,7 +180,8 @@
             width: 45px;
             height: 45px;
             display: block;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 50%;
         }
 </style>
 </head>
@@ -209,8 +200,6 @@
 			<a href="interface.php" class="active-view">Log Out</a>
         </nav>
     </header>
-
-<div class="page-title">Register PIC</div>
 
 <form class="form-container" action="registerPICProcess.php" method="POST">
 
