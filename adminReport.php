@@ -4,9 +4,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-
 include("dbconn.php");
-
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1); 
@@ -40,7 +38,7 @@ $result = $dbconn->query($query);
         }
 
         body {
-            background-color: #b4a7d6; 
+            background-color: #ffffff; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -49,7 +47,7 @@ $result = $dbconn->query($query);
 
        
         header {
-            background-color: #4f0f69; 
+            background-color: #4A0E4E; 
             color: white;
             width: 100%;
             height: 70px;
@@ -65,13 +63,15 @@ $result = $dbconn->query($query);
             display: flex;
             align-items: center;
             justify-content: flex-start;
+            padding: 6px;
         }
 
         .nav-logo-img {
-            width: 45px;
+             width: 45px;
             height: 45px;
             display: block;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .header-title {
@@ -197,7 +197,7 @@ $result = $dbconn->query($query);
             display: inline-flex;
             align-items: center;
             gap: 8px; 
-            background-color: #3b145a;
+            background-color: #4A0E4E;
             color: white !important;
             padding: 10px 20px; 
             font-size: 14px;
