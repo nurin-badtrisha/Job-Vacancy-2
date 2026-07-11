@@ -1,18 +1,15 @@
 <?php
 session_start();
 
-
 $conn = new mysqli("localhost", "root", "", "startit");
 if ($conn->connect_error) {
     die("DB Error: " . $conn->connect_error);
 }
 
-
 if (isset($_SESSION['username'])) {
     $username = $conn->real_escape_string($_SESSION['username']);
     $sql = "SELECT * FROM applicant WHERE username = '$username'";
 } else {
-    
     $applicant_id = $conn->real_escape_string($_SESSION['applicant_id'] ?? $_SESSION['user_id'] ?? '');
     $sql = "SELECT * FROM applicant WHERE applicant_id = '$applicant_id'";
 }
@@ -21,8 +18,6 @@ $result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {
     $user = $result->fetch_assoc();
-    
-    
     $_SESSION['applicant_id'] = $user['applicant_id']; 
 } else {
     die("Error: Applicant record details could not be found for your active logged-in session. Please log out and log in again.");
@@ -41,18 +36,16 @@ if ($result && $result->num_rows > 0) {
         }
 
         body {
-            background-color: #b4bcf4; 
+            background-color: #F8F9FA; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column; 
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #2D2D2D;
         }
 
-        
         .nav-header {
-            background-color: #4f0f69; 
+            background-color: #4A0E4E; 
             width: 100%;
             height: 70px;
             display: flex;
@@ -60,49 +53,51 @@ if ($result && $result->num_rows > 0) {
             justify-content: space-between;
             padding: 0 40px;
             position: relative;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
 
-        
-        .logo-trigger-box {
+        .toggle-menu-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 6px 20px;
+            border-radius: 25px;
             cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 6px;
-            border-radius: 8px;
-            transition: 0.2s;
         }
 
-        .logo-trigger-box:hover {
-            background-color: rgba(255, 255, 255, 0.15);
+        .toggle-menu-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
         }
 
         .nav-logo-img {
-            width: 45px;
-            height: 45px;
+            width: 32px;
+            height: 32px;
             display: block;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .header-title {
             color: white;
             font-size: 1.4rem;
-            font-weight: 500;
+            font-weight: 600;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
         }
-		
-		
+        
         .sidebar-menu {
             position: absolute;
             top: 70px;
             left: -260px; 
             width: 240px;
-            background-color: #4A154B;
-            box-shadow: 4px 8px 25px rgba(0, 0, 0, 0.3);
+            background-color: #4A0E4E;
+            box-shadow: 4px 8px 25px rgba(0, 0, 0, 0.15);
             border-bottom-right-radius: 12px;
             padding: 20px 0;
             display: flex;
@@ -119,7 +114,7 @@ if ($result && $result->num_rows > 0) {
             color: #FFFFFF;
             padding: 16px 25px;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
             border-left: 4px solid transparent;
             transition: background 0.2s, border-left 0.2s;
@@ -131,7 +126,7 @@ if ($result && $result->num_rows > 0) {
 
         .sidebar-menu a.active-view {
             background-color: rgba(255, 255, 255, 0.15);
-            border-left: 4px solid #B4A4EB;
+            border-left: 4px solid #FFFFFF;
             font-weight: bold;
         }
 
@@ -140,7 +135,7 @@ if ($result && $result->num_rows > 0) {
             background-color: rgba(255, 255, 255, 0.15);
             margin: 10px 25px;
         }
-		
+        
         .main-content {
             flex: 1;
             display: flex;
@@ -150,12 +145,13 @@ if ($result && $result->num_rows > 0) {
         }
 
         .profile-container {
-            background-color: #512b7c;
+            background-color: #FFFFFF;
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #EAEAEA;
             display: flex;
             gap: 40px;
             align-items: flex-start;
@@ -167,9 +163,9 @@ if ($result && $result->num_rows > 0) {
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: white;
-            font-size: 18px;
-            font-weight: 500;
+            color: #4A5568;
+            font-size: 16px;
+            font-weight: 600;
             width: 160px;
         }
 
@@ -185,8 +181,8 @@ if ($result && $result->num_rows > 0) {
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #ff99bb; 
-            background-color: #ffccd5;
+            border: 3px solid #F3E8FF; 
+            background-color: #F8F9FA;
         }
 
         .file-input-wrapper {
@@ -202,44 +198,51 @@ if ($result && $result->num_rows > 0) {
 
         .edit-label {
             cursor: pointer;
+            color: #6B21A8;
             transition: color 0.2s;
         }
 
         .edit-label:hover {
-            color: #ff99bb;
+            color: #4A0E4E;
+            text-decoration: underline;
         }
       
         .form-section {
             flex: 1;
             display: grid;
-            grid-template-columns: 120px 1fr 120px 1fr; 
-            gap: 15px 15px;
+            grid-template-columns: 130px 1fr 130px 1fr; 
+            gap: 15px 20px;
             align-items: center;
         }
 
         .form-section label {
-            color: white;
-            font-weight: bold;
-            font-size: 13px;
+            color: #4A5568;
+            font-weight: 700;
+            font-size: 14px;
             white-space: nowrap;
         }
 
         .form-section input[type="text"],
         .form-section input[type="email"],
         .form-section input[type="password"],
-        .form-section input[type="date"],
-        .form-section select {
+        .form-section input[type="date"] {
             width: 100%;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 6px;
-            background-color: white;
-            color: #333;
-            font-size: 13px;
+            padding: 10px 14px;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            background-color: #F8F9FA;
+            color: #2D2D2D;
+            font-size: 14px;
             box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s, background-color 0.2s;
         }
 
-       
+        .form-section input:focus {
+            border-color: #4A0E4E;
+            background-color: #FFFFFF;
+        }
+
         .full-width-row {
             grid-column: span 3; 
         }
@@ -251,68 +254,86 @@ if ($result && $result->num_rows > 0) {
         .radio-group {
             display: flex;
             align-items: center;
-            gap: 15px;
-            color: white;
-            font-size: 13px;
+            gap: 20px;
+            color: #4A5568;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         .radio-group label {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             cursor: pointer;
         }
 
         .radio-group input[type="radio"] {
             margin: 0;
-            accent-color: #ff99bb;
+            accent-color: #4A0E4E;
+            width: 16px;
+            height: 16px;
         }
 
         .button-section {
             grid-column: span 4;
             display: flex;
             justify-content: flex-end;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .btn-update {
-            background-color: #6320a0; 
+            background-color: #4A0E4E; 
             color: white;
             font-weight: bold;
-            font-size: 14px;
-            padding: 10px 40px;
+            font-size: 16px;
+            padding: 12px 45px;
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(74, 14, 78, 0.2);
             transition: background-color 0.2s, transform 0.1s;
         }
 
         .btn-update:hover {
-            background-color: #7b2cb7;
+            background-color: #350A38;
             transform: translateY(-1px);
+        }
+
+        @media (max-width: 850px) {
+            .profile-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .form-section {
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+            .full-width-row, .button-section, .clear-row {
+                grid-column: span 1;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="nav-header">
-    <div class="logo-trigger-box" id="logoToggle">
-        <img src="startIT logo.jpg" alt="startIT Menu Logo" class="nav-logo-img">
-    </div>
+    <button class="toggle-menu-btn" id="logoToggle">
+        <img src="startIT logo.jpg" alt="startIT" class="nav-logo-img">
+    </button>
     <div class="header-title">Update Profile</div>
-    <div></div> </div>
+    <div></div>
+</div>
 
 <div class="sidebar-menu" id="panelSidebar">
-	<a href="updateprofile.php" class="active-view">Update Profile</a>
-	<a href="jobSearching.php">Job Vacancy</a>
-	<a href="applicationStatus.php">Application Status</a>
-	<div class="sidebar-divider"></div>
-	<a href="login.php" style="color: #FF8A8A; font-size: 0.95rem;">Log Out</a>
+    <a href="updateprofile.php" class="active-view">Update Profile</a>
+    <a href="jobSearching.php">Job Vacancy</a>
+    <a href="applicationStatus.php">Application Status</a>
+    <div class="sidebar-divider"></div>
+    <a href="login.php" style="color: #FF8A8A; font-size: 0.95rem;">Log Out</a>
 </div>
 	
 <div class="main-content">
-    <form method="POST" action="updateprofileprocess.php" enctype="multipart/form-data" style="width: 100%; max-width: 900px;">
+    <form method="POST" action="updateprofileprocess.php" enctype="multipart/form-data" style="width: 100%; max-width: 950px;">
         <div class="profile-container">
             
             <div class="avatar-section">
@@ -404,7 +425,6 @@ if ($result && $result->num_rows > 0) {
         }
     });
 
-   
     document.getElementById('profile_picture').addEventListener('change', function() {
         const file = this.files[0];
         if (file) {
