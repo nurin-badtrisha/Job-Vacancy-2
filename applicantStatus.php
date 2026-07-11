@@ -62,7 +62,7 @@ $query = "SELECT
           FROM apply_job aj
           LEFT JOIN applicant a ON aj.applicant_id = a.applicant_id
           LEFT JOIN job_posting j ON aj.job_id = j.job_id
-          WHERE j.pic_id = '$current_pic_id'"; // Tapis di sini!
+          WHERE j.pic_id = '$current_pic_id'";
 
 $result = $conn->query($query);
 ?>
@@ -81,23 +81,25 @@ $result = $conn->query($query);
         }
 
         body {
-            background-color: #b4bcf4; 
+            background-color: #F8F9FA; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: #2D2D2D;
         }
 
         .nav-header {
-            background-color: #4f0f69; 
+            background-color: #4A0E4E; 
             width: 100%;
             height: 70px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 40px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .nav-logo-img {
@@ -109,14 +111,14 @@ $result = $conn->query($query);
 
         .header-title {
             color: white;
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 600;
             text-align: center;
             letter-spacing: 0.5px;
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			z-index: 10;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
         }
 
         .header-spacer {
@@ -126,16 +128,15 @@ $result = $conn->query($query);
         .container {
             width: 95%;
             max-width: 1150px;
-            margin: auto;
-            padding-top: 20px;
-            padding-bottom: 20px;
+            margin: 40px auto;
         }
 
         .card {
             background-color: #ffffff;
-            border-radius: 30px;
+            border-radius: 20px;
             padding: 40px;
-            box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #EAEAEA;
             display: flex;
             flex-direction: column;
             gap: 25px;
@@ -144,16 +145,21 @@ $result = $conn->query($query);
         .search-container {
             display: flex;
             align-items: center;
-            background-color: #fffdf6; 
-            border-radius: 8px;
-            padding: 8px 15px;
+            background-color: #F8F9FA; 
+            border-radius: 25px;
+            padding: 10px 20px;
             width: 100%;
-            max-width: 500px;
-            border: 1px solid #f1ece1;
+            max-width: 400px;
+            border: 1px solid #E2E8F0;
+            transition: border-color 0.2s;
+        }
+
+        .search-container:focus-within {
+            border-color: #4A0E4E;
         }
 
         .search-container i {
-            color: #8e8271;
+            color: #A0AEC0;
             margin-right: 15px;
             font-size: 16px;
         }
@@ -164,42 +170,47 @@ $result = $conn->query($query);
             width: 100%;
             outline: none;
             font-size: 15px;
-            color: #333;
+            color: #2D2D2D;
         }
 
         .table-wrapper {
-            border: 1px solid #b3a2f2;
-            border-radius: 4px;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #f1effd; 
+            background-color: #FFFFFF; 
         }
 
         th {
-            background-color: #b3a2f2; 
-            color: #000000;
-            font-weight: bold;
-            font-size: 18px;
-            padding: 14px;
+            background-color: #F3E8FF; 
+            color: #4A0E4E;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 16px;
             text-align: left;
-            border-bottom: 1px solid #9c8be0;
+            border-bottom: 2px solid #EAEAEA;
         }
 
         th:not(:last-child), td:not(:last-child) {
-            border-right: 1px solid #cbc2f7;
+            border-right: 1px solid #F0F0F0;
         }
 
         td {
-            padding: 14px;
+            padding: 16px;
             height: 55px; 
-            border-bottom: 1px solid #cbc2f7;
-            font-size: 15px;
-            color: #333;
+            border-bottom: 1px solid #F0F0F0;
+            font-size: 0.95rem;
+            color: #4A5568;
             outline: none;
+        }
+
+        tr:hover td {
+            background-color: #F8F9FA;
         }
 
         tr:last-child td {
@@ -208,8 +219,8 @@ $result = $conn->query($query);
 
         .no-records {
             text-align: center;
-            font-size: 18px;
-            color: #666;
+            font-size: 1rem;
+            color: #718096;
             font-style: italic;
             padding: 30px;
         }
@@ -222,19 +233,21 @@ $result = $conn->query($query);
         }
 
         .btn-back {
-            background-color: #4A154B;
+            background-color: #4A0E4E;
             color: white;
             border: none;
-            padding: 12px 28px;
-            font-size: 16px;
+            padding: 12px 40px;
+            font-size: 1rem;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            box-shadow: 0 4px 6px rgba(74, 14, 78, 0.2);
+            transition: background-color 0.2s, transform 0.1s;
         }
 
         .btn-back:hover {
-            background-color: #330e34;
+            background-color: #350A38;
+            transform: translateY(-1px);
         }
 
         .status-action-container {
@@ -242,51 +255,50 @@ $result = $conn->query($query);
             align-items: center;
             gap: 8px;
         }
-		
-		.status-select {
-			flex: 1;
-			padding: 8px 8px;
-			font-size: 14px;
-			font-weight: 600;
-			border-radius: 6px;
-			border: 1px solid #9c8be0;
-			cursor: pointer;
-			transition: all 0.2s ease;
-		}
-
-        .status-select.pending {
-            background-color: #fff3cd;
-            color: #856404;
-            border-color: #ffeeba;
+        
+        .status-select {
+            flex: 1;
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 20px;
+            border: 1px solid #E2E8F0;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
         }
 
-		.status-select.approved {
-			background-color: #d4edda;
-			color: #155724;
-			border-color: #c3e6cb;
-		}
+        .status-select.pending {
+            background-color: #EDF2F7;
+            color: #4A5568;
+        }
 
-		.status-select.rejected {
-			background-color: #f8d7da;
-			color: #721c24;
-			border-color: #f5c6cb;
-		}
+        .status-select.approved {
+            background-color: #D1FAE5;
+            color: #059669;
+        }
+
+        .status-select.rejected {
+            background-color: #FEE2E2;
+            color: #DC2626;
+        }
 
         .btn-update {
-            background-color: #4A154B;
+            background-color: #4A0E4E;
             color: white;
             border: none;
-            padding: 8px 12px;
-            font-size: 13px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
             font-weight: bold;
-            border-radius: 6px;
+            border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.2s;
             white-space: nowrap;
         }
 
         .btn-update:hover {
-            background-color: #330e34;
+            background-color: #350A38;
         }
     </style>
 </head>
@@ -295,7 +307,7 @@ $result = $conn->query($query);
 <?php if (!empty($message)) echo $message; ?>
 
 <div class="nav-header">
-    <img src="startIT logo.jpg" alt="startIT Menu Logo" class="nav-logo-img">
+    <img src="startIT logo.jpg" alt="startIT" class="nav-logo-img">
     <div class="header-title">Applicant Status</div>
     <div class="header-spacer"></div>
 </div>
@@ -336,7 +348,7 @@ $result = $conn->query($query);
                                 <td><?php echo htmlspecialchars($row['applicant_phone'] ?? 'N/A'); ?></td>
                                 <td>
                                     <?php if(!empty($row['resume_path'])): ?>
-                                        <a href="<?php echo htmlspecialchars($row['resume_path']); ?>" target="_blank" style="color: #512da8; font-weight: bold;">View</a>
+                                        <a href="<?php echo htmlspecialchars($row['resume_path']); ?>" target="_blank" style="color: #6B21A8; font-weight: bold; text-decoration: none;">View</a>
                                     <?php else: ?>
                                         N/A
                                     <?php endif; ?>
