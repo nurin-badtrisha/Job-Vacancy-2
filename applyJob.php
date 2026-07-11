@@ -2,7 +2,6 @@
 session_start();
 include("dbconn.php");
 
-
 if (isset($_GET['id'])) {
     $job_id = mysqli_real_escape_string($dbconn, $_GET['id']);
 } else {
@@ -16,124 +15,136 @@ if (!$query) {
     die("Database Error: " . mysqli_error($dbconn));
 }
 
-
 if (mysqli_num_rows($query) == 0) {
     die("Error: Job vacancy not found.");
 }
 
 $row = mysqli_fetch_assoc($query);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Apply Job</title>
-
 <style>
-body{
-    background:#b7a9f0;
-    font-family:"Segoe UI", sans-serif;
-}
+    body {
+        background-color: #F8F9FA;
+        font-family: "Segoe UI", sans-serif;
+        color: #2D2D2D;
+        min-height: 100vh;
+        padding: 20px 0;
+    }
 
-.container{
-    width:70%;
-    max-width: 850px;
-    margin:40px auto;
-    background:white;
-    padding:35px;
-    border-radius:20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
+    .container {
+        width: 90%;
+        max-width: 850px;
+        margin: 40px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border: 1px solid #EAEAEA;
+    }
 
-img{
-    width:100%;
-    height:300px;
-    object-fit:cover;
-    border-radius:15px;
-}
+    img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 1px solid #F0F0F0;
+    }
 
-h1{
-    margin-top:20px;
-    color: #2d2525;
-}
+    h1 {
+        margin-top: 25px;
+        color: #4A0E4E;
+        font-size: 2rem;
+        font-weight: 700;
+    }
 
-.detail{
-    margin-top:15px;
-    font-size:18px;
-    color: #333;
-}
+    .detail {
+        margin-top: 15px;
+        font-size: 16px;
+        color: #4A5568;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
+    .description-text {
+        margin-top: 12px;
+        font-size: 15px;
+        line-height: 1.7; 
+        color: #4A5568;
+        background: #F8F9FA;
+        padding: 25px;
+        border-radius: 12px;
+        border-left: 5px solid #4A0E4E;
+        white-space: pre-line; 
+    }
 
-.description-text {
-    margin-top: 10px;
-    font-size: 16px;
-    line-height: 1.7; 
-    color: #444;
-    background: #fdfbff;
-    padding: 20px;
-    border-radius: 12px;
-    border-left: 5px solid #5a2d82;
-    white-space: pre-line; 
-}
+    .resume-box {
+        margin-top: 35px;
+        border-top: 1px solid #E2E8F0;
+        padding-top: 25px;
+    }
 
-.resume-box{
-    margin-top:30px;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
-}
+    .resume-box label {
+        font-size: 16px;
+        font-weight: 700;
+        color: #4A0E4E;
+        display: block;
+        margin-bottom: 12px;
+    }
 
-.resume-box label {
-    font-size: 18px;
-    font-weight: bold;
-    color: #2d2525;
-}
+    .resume-box input[type="file"] {
+        font-size: 14px;
+        color: #4A5568;
+    }
 
+    .form-actions-row {
+        display: flex;
+        align-items: center;
+        gap: 15px; 
+        margin-top: 30px;
+    }
 
-.form-actions-row {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Adds space separating the side-by-side buttons */
-    margin-top: 20px;
-}
+    .send-btn {
+        background: #4A0E4E;
+        color: white;
+        border: none;
+        padding: 12px 40px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(74, 14, 78, 0.2);
+        transition: background-color 0.2s, transform 0.1s;
+    }
 
-.send-btn{
-    background:#5a2d82;
-    color:white;
-    border:none;
-    padding:12px 40px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight: bold;
-    transition: 0.2s ease;
-}
+    .send-btn:hover {
+        background: #350A38;
+        transform: translateY(-1px);
+    }
 
-.send-btn:hover{
-    background:#6a3fa0;
-    transform: translateY(-2px);
-}
+    .back-btn {
+        background: none;
+        color: #4A0E4E;
+        border: 1px solid #4A0E4E;
+        padding: 12px 40px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.1s;
+    }
 
-
-.back-btn {
-    background: #d1c6ec;
-    color: #2d2525;
-    border: 2px solid #2d2525;
-    padding: 12px 35px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.back-btn:hover {
-    background: #b7a9f0;
-    transform: translateY(-2px);
-}
+    .back-btn:hover {
+        background: rgba(74, 14, 78, 0.05);
+        transform: translateY(-1px);
+    }
 </style>
 </head>
-
 <body>
 
 <div class="container">
@@ -168,7 +179,7 @@ h1{
         📅 <strong>Working Days:</strong> <?php echo htmlspecialchars($row['working_days']); ?>
     </div>
 
-    <div class="detail" style="margin-top: 25px;">
+    <div class="detail" style="margin-top: 25px; display: block;">
         📝 <strong>Description:</strong>
         <div class="description-text">
             <?php echo nl2br(htmlspecialchars($row['job_description'])); ?>
@@ -181,18 +192,12 @@ h1{
 
         <div class="resume-box">
             <label>Upload Resume:</label>
-            <br><br>
             <input type="file" name="resume" required>
         </div>
 
         <div class="form-actions-row">
-            <button type="submit" class="send-btn">
-                SEND
-            </button>
-
-            <button type="button" class="back-btn" onclick="window.location.href='jobSearching.php'">
-                BACK
-            </button>
+            <button type="submit" class="send-btn">SEND</button>
+            <button type="button" class="back-btn" onclick="window.location.href='jobSearching.php'">BACK</button>
         </div>
 
     </form>
